@@ -227,3 +227,37 @@ pnpm dev --tunnel-url https://randomly-generated-hostname.trycloudflare.com:3000
 - [App authentication](https://shopify.dev/apps/auth)
 - [Shopify CLI](https://shopify.dev/apps/tools/cli)
 - [Shopify API Library documentation](https://github.com/Shopify/shopify-api-js#readme)
+
+# Running/hosting the app with Docker:
+* Add an empty `yarn.lock` or `package.lock` inside the `web\frontend` since it's a full project on it's own.
+
+### Extra setup requirements:
+* SHOPIFY_API_KEY=<The client id>
+* SHOPIFY_API_SECRET=<The client secret>
+* SCOPES=write_products,write_customers,write_draft_orders,read_orders,read_customer_events (add more or remove)
+* HOST=https://shopify-app-your-store-might-need.com
+* PORT=8081
+
+SHOPIFY_API_KEY and SHOPIFY_API_SECRET can be found under `Your application` > `Overview` as "Client ID" and "Client secret"
+respectively. These are required to bundle/build your front end app, as well as run the back-end of the application.
+
+* Set up your hosting machine domain IP address to point to your app url (the registered domain DNS configurations).
+* On your Shopify partners dashboard, under your Application > `App setup` > `URLs`, update the
+`App URL` and `Allowed redirection URL(s)` inputs to include your app url and press save. (This is the ngrok
+url for dev or your actual app domain in prod)
+
+
+#### Dev (dev.env):
+* Run `docker build --build-arg SHOPIFY_API_KEY=<shopify client id> -t demos .` to build an image
+  based on the default Dockerfile generated when scaffolding the starter app with Shopify CLI.
+* The run  `docker run -p 8081:8081 --rm --env-file dev.env demos` then `ngrok http 8081` to expose the app.
+* Install the app into your Shopify development store by visiting the following url in your browser: `https://<ngrok_url>/auth?shop=<store_name>.myshopify.com`
+
+
+### Prod (prod.env):
+* Run `docker build --build-arg SHOPIFY_API_KEY=<shopify client id> -t <the_new_tag> .` to build an image
+  based on the default Dockerfile generated when scaffolding the starter app with Shopify CLI.
+* The run `docker run -d -p 8081:8081 --env-file prod.env <the_new_tag>`
+* Install the app into your Shopify development store by visiting the following url in your browser: `https://<HOST in prod.env>/auth?shop=<store_name>.myshopify.com`
+
+TODO: whitelist urls under your Shopify app dashboard.

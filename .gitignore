@@ -1,6 +1,7 @@
 # Environment Configuration
 .env
-.env.*
+prod.env.*
+dev.env.*
 
 # Dependency directory
 node_modules
