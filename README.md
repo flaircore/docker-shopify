@@ -250,7 +250,8 @@ url for dev or your actual app domain in prod)
 #### Dev (dev.env):
 * Run `docker build --build-arg SHOPIFY_API_KEY=<shopify client id> -t demos .` to build an image
   based on the default Dockerfile generated when scaffolding the starter app with Shopify CLI.
-* The run  `docker run -p 8081:8081 --rm --env-file dev.env demos` then `ngrok http 8081` to expose the app.
+* To expose the app via https, run `ngrok http 8081`.
+* Then run  `docker run -p 8081:8081 --rm --env-file dev.env demos`
 * Install the app into your Shopify development store by visiting the following url in your browser: `https://<ngrok_url>/auth?shop=<store_name>.myshopify.com`
 
 
