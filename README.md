@@ -1,3 +1,11 @@
+## Blog @
+https://flaircore.com/blog/dockerizing-your-shopify-app
+||
+https://dev.to/nickbahson/dockerizing-your-shopify-app-5ef4
+
+### Dockerize your shopify app with yarn, see section 
+https://github.com/flaircore/docker-shopify#runninghosting-the-app-with-docker
+
 # Shopify App Template - Node
 
 This is a template for building a [Shopify app](https://shopify.dev/apps/getting-started) using Node and React. It contains the basics for building a Shopify app.
